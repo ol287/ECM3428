@@ -1,0 +1,8 @@
+def hamming_distance(a, b):
+    # XOR the numbers and count the 1s in the binary representation of the result
+    return bin(a ^ b).count('1')
+
+# Example
+num1 = 0b1011001
+num2 = 0b1001101
+print(hamming_distance(num1, num2))  # Output: 2
