@@ -1,4 +1,5 @@
 import heapq
+import math
 
 # Node Class: Represents a tree node with character, frequency, and pointers to left and right children.
 class Node:
@@ -74,6 +75,24 @@ def print_tree(node, prefix=""):
         print_tree(node.right, prefix + "1")
 
 
+# Entropy Calculation: Function to compute the entropy of the symbols
+def calculate_entropy(characters):
+    """
+    Calculates the entropy of the given set of characters and their frequencies.
+
+    Parameters:
+    characters (list of tuples): A list where each tuple is (char, freq).
+
+    Returns:
+    float: The entropy of the symbols in bits/symbol.
+    """
+    entropy = 0
+    for _, freq in characters:
+        if freq > 0:  # Avoid log(0) issues
+            entropy += freq * math.log2(1 / freq)  # or equivalently -freq * log2(freq)
+    return entropy
+
+
 # Example usage
 if __name__ == "__main__":
     # Input characters and their frequencies
@@ -85,3 +104,7 @@ if __name__ == "__main__":
     # Print the Huffman codes for each character
     print("Huffman Codes:")
     print_tree(root)
+
+    # Calculate and print the entropy of the symbols
+    entropy = calculate_entropy(characters)
+    print(f"\nEntropy of the symbols: {entropy:.4f} bits/symbol")
